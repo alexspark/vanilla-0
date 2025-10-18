@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <script type="importmap">
+    {
+      "imports": {
+        "roughjs": "https://cdn.jsdelivr.net/npm/roughjs@4.6.6/+esm",
+        "rough-notation": "https://cdn.jsdelivr.net/npm/rough-notation@0.5.1/+esm"
+      }
+    }
+  </script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      html {
+        filter: invert(1) hue-rotate(180deg);
+      }
+    }
+
+    .body {
+      display: grid;
+      place-items: center;
+      height: 100dvh;
+      width: 100%;
+      font-family: sans-serif;
+      font-size: 1.2rem;
+      color: darkblue;
+      background: floralwhite;
+    }
+
+    .main {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .article {
+      max-width: 60ch;
+    }
+
+    ul > li + li {
+      margin-top: 0.5rem;
+    }
+  </style>
+
+  <body class="body">
+    <main class="main">
+      <article class="article">
+        <header>
+          <h1>Hi 👋,</h1>
+          <p>
+            This is an experimental page to test a new way for me to build sites
+          </p>
+        </header>
+
+        <h3>The Goals</h3>
+        <ul>
+          <li>fast, scalable</li>
+          <li>highly available</li>
+          <li>cheap</li>
+          <li>decoupled from frontend innovation</li>
+          <li>no user management</li>
+        </ul>
+
+        <h3>The Tech Stack</h3>
+        <ul>
+          <li>vanilla html, css, js</li>
+          <li>no build, everything is inline</li>
+          <li>if I need server, cloudflare workers/durable objects</li>
+          <li>deployed on github and cloudflare pages</li>
+          <li>route 53 healthchecks + failover policy</li>
+          <li>if I need a server, cloudflare workers and durable objects</li>
+          <li>if I need real-time things, rust websocket server on fly.io</li>
+        </ul>
+      </article>
+
+      <canvas id="canvas" width="200" height="100"></canvas>
+    </main>
+
+    <script type="module">
+      import rough from "roughjs";
+      import { annotate } from "rough-notation";
+
+      const rc = rough.canvas(document.getElementById("canvas"));
+
+      rc.rectangle(0, 0, 200, 100, { fill: "purple" });
+
+      const h3s = document.querySelectorAll("h3");
+
+      for (const h3 of h3s) {
+        annotate(h3, {
+          type: "underline",
+          color: "navy",
+        }).show();
+      }
+    </script>
+  </body>
+</html>
